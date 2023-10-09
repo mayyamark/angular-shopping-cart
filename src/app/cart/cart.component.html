@@ -10,3 +10,21 @@
 </div>
 
 <p *ngIf="items.length === 0">Your shopping cart is empty!</p>
+
+<form *ngIf="items.length > 0" [formGroup]="checkoutFrom" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">
+      Name
+    </label>
+    <input id="name" type="text" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="address">
+      Address
+    </label>
+    <input id="address" type="text" formControlName="address" />
+  </div>
+
+  <button type="submit" class="button">Purchase</button>
+</form>

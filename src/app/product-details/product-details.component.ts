@@ -29,4 +29,8 @@ export class ProductDetailsComponent implements OnInit {
     this.cartService.addToCart(product);
     window.alert(`Product ${product.name} was aaded to the cart!`)
   }
+
+  isInCart(product: Product): boolean {
+    return this.cartService.isInCart(product);
+  }
 }

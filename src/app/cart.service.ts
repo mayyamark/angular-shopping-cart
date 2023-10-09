@@ -21,4 +21,8 @@ export class CartService {
     this.items = [];
     return this.items;
   }
+
+  isInCart(product: Product): boolean {
+    return this.items.some((i) => i.id === product.id);
+  }
 }

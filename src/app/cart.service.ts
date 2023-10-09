@@ -1,3 +1,5 @@
+import { Shipping } from './shipping';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from './products';
 
@@ -7,7 +9,9 @@ import { Product } from './products';
 export class CartService {
   items: Product[] = [];
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getCart() {
     return this.items;
@@ -24,5 +28,9 @@ export class CartService {
 
   isInCart(product: Product): boolean {
     return this.items.some((i) => i.id === product.id);
+  }
+
+  getShippingPrices() {
+    return this.http.get<Shipping[]>('/assets/shipping.json');
   }
 }

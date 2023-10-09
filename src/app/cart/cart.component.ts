@@ -25,4 +25,9 @@ export class CartComponent {
     console.warn('The order was submitted!', this.checkoutFrom.value);
     this.checkoutFrom.reset();
   }
+
+  onClearClick(): void {
+    this.cartService.clearCart();
+    this.items = this.cartService.getCart();
+  }
 }

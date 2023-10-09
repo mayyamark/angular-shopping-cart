@@ -2,15 +2,20 @@ import { Shipping } from './shipping';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from './products';
+import { CART_KEY } from './cart';
+import { LocalService } from './local.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  items: Product[] = [];
+  get items(): Product[] {
+    return this.localService.getData(CART_KEY) || [];
+  }
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private localService: LocalService
   ) { }
 
   getCart() {
@@ -18,11 +23,16 @@ export class CartService {
   }
 
   addToCart(product: Product) {
-    this.items.push(product);
+    this.localService.saveData(CART_KEY, [...this.items, product]);
+  }
+
+  removeFromCart(product: Product) {
+    this.localService.saveData(CART_KEY, this.items.filter((i) => i.id !== product.id));
   }
 
   clearCart() {
-    this.items = [];
+    this.localService.saveData(CART_KEY, []);
+
     return this.items;
   }
 

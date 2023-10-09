@@ -12,4 +12,8 @@ export class ProductListComponent {
   share(productName: string) {
     window.alert(`The product ${productName} has been shared!`);
   }
+
+  notifyForSale(productPrice: number) {
+    window.alert(`The current price is $${productPrice}, we will notify you when the product is on sale!`)
+  }
 }
